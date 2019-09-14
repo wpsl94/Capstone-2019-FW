@@ -16,6 +16,8 @@
 
 #### Mac OS 10.14.3 Mojave
 
+#### Windows 10
+
 #### Java 8++ (lastest version)
 
 #### Arduino & ZigBee (lastest version)
