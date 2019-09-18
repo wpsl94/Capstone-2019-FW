@@ -28,8 +28,6 @@
 
 #### Android
 
-#### Google Vision API
-
 ## Team member
 
 > Or Contributors/People
