@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="warning">#F25832</color>
+    <color name="deep_warning">#D17C2B</color>
+    <color name="skyblue">#00BFFF</color>
+    <color name="darkgreen">#518D54 </color>
+    <color name="deepgreen">#3A5E48 </color>
+    <color name="graynavy">#2F4A57 </color>
+    <color name="pink">#E1776B </color>
+    <color name="lightblue">#7BA6B4 </color>
+    <color name="lightsky">#A5BFC5 </color>
+    <color name="green">#7BB35A</color>
+    <color name="beige">#F1EBEA</color>
+    <color name="white">#FFFFFF</color>
+</resources>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="40dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:weightSum="10"
+    android:background="#1B212F"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_weight="1"
+        android:gravity="top|center_horizontal"
+        android:layout_marginTop="30dp"
+        android:hint="STATUS"
+        android:textColorHint="@color/warning"
+        android:textSize="40dp"
+        android:textStyle="bold"
+
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="현재 진원지"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/white"
+                android:textSize="22dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/start_floor"
+                android:layout_width="158dp"
+                android:layout_height="51dp"
+                android:layout_gravity="center"
+                android:gravity="right|center_vertical"
+                android:text="F"
+                android:textColor="@color/warning"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:background="@drawable/edge_1"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/temptxt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="온도"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/white"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/temp"
+                android:layout_width="158dp"
+                android:layout_height="50dp"
+                android:layout_gravity=""
+                android:gravity="right|center_vertical"
+                android:text="°C"
+                android:textColor="@color/warning"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:background="@drawable/edge_1"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/gastxt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="대기 농도"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/white"
+                android:textSize="22dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/gas"
+                android:layout_width="158dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="right|center_vertical"
+                android:text="ppm"
+                android:textColor="@color/warning"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:background="@drawable/edge_1"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/upfloor"
+                android:layout_width="107dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="right|center_vertical"
+                android:text="F"
+                android:textColor="@color/warning"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:background="@drawable/edge_1"/>
+
+            <TextView
+                android:id="@+id/uptxt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="이상 상행 대피"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+
+            <TextView
+                android:id="@+id/dwfloor"
+                android:layout_width="107dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:gravity="right|center_vertical"
+                android:text="F"
+                android:textColor="@color/warning"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:background="@drawable/edge_1"/>
+
+            <TextView
+                android:id="@+id/dwtxt"
+                android:layout_width="188dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="이하 하행 대피"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+
+        android:id="@+id/btn_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/btn_3"
+        android:text="화재 신고"
+        android:textColor="#ffffff"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
