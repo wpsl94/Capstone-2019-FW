@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvBluetoothStatus" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
@@ -105,15 +105,16 @@
 
         <EditText
         android:id="@+id/tvSendData"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Send Data"
+        android:hint="Send Data"
         app:layout_constraintStart_toEndOf="@+id/btnSendData"
         app:layout_constraintTop_toTopOf="@+id/btnSendData" />
+
             <TextView
                 android:id="@+id/tvReceiveData"
                 android:layout_width="wrap_content"
