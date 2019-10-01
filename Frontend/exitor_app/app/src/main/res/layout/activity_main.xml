@@ -44,7 +44,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_height="wrap_content"
                 android:text="블루투스 ON"
-                android:background="@drawable/btn_1"
+                android:background="@drawable/btn_3"
                 android:textSize="20dp"
                  />
 
@@ -101,7 +101,7 @@
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="@+id/btnConnect"
             app:layout_constraintTop_toBottomOf="@+id/btnConnect"
-            android:background="@drawable/btn_3"/>
+            android:background="@drawable/btn_4"/>
 
         <EditText
         android:id="@+id/tvSendData"
