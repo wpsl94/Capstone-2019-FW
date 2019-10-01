@@ -1,0 +1,52 @@
+#include <SoftwareSerial.h> // 0,1번핀 제외하고 Serial 통신을 하기 위해 선언
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#define SensorIn A0
+/*
+*
+*  arduino 물센서, LCD센서, 블루투스센서 통합 코딩 
+*
+*/
+
+// Serial 통신핀으로 D11번핀을 Rx로, D10번핀을 Tx로 선언
+SoftwareSerial mySerial(11, 10); // HC-06 TX=11번핀 , RX=10번핀 연결, 블루투스 센서
+LiquidCrystal_I2C lcd(0x27,16,2); // LCD주소, 16x2  LCD센서 
+
+void setup()
+{
+ Serial.begin(9600); // 통신 속도 9600bps로 PC와 시리얼 통신 시작
+ mySerial.begin(9600); // 통신 속도 9600bps로 블루투스 시리얼 통신 시작
+ lcd.init(); // LCD 시작
+ lcd.backlight();
+
+}
+
+void loop()
+{
+   int R = analogRead(SensorIn); //Read Sensor값 (수위센서)
+   lcd.setCursor(0,0); // LCD첫번째줄로 커서이동
+    lcd.print("Water value : "); // 첫번째줄에 워터벨류문구 출력
+    lcd.setCursor(0,1); // LCD두번째줄로 커서이동
+    lcd.println(R);    // LCD 2번째줄에 실제 값 출력
+    delay(1000);
+
+
+  
+   // mySerial 핀에 입력이 들어오면, 바이트단위로 읽어서 PC로 출력
+ if (mySerial.available())
+ {
+   Serial.write(mySerial.read());
+   lcd.setCursor(0,0);
+   lcd.print("bluetooth to pc");
+   delay(100);
+ }
+  // Serial 핀에 입력이 들어오면, 바이트단위로 읽어서 블루투스로 출력
+ if (Serial.available())
+ {
+   mySerial.write(Serial.read());
+   lcd.setCursor(0,1);
+   lcd.print("pc to bluetooth");
+   delay(100);
+ }
+ lcd.clear();
+ }
