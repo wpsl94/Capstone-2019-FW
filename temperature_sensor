@@ -1,0 +1,28 @@
+#include <Wire.h>
+#include <Adafruit_MLX90614.h>
+
+Adafruit_MLX90614 mlx = Adafruit_MLX90614();
+
+void setup() {
+  Serial.begin(9600);
+  //Serial.println("Adafruit MLX90614 test");  
+  mlx.begin();  
+}
+
+void loop() {
+  float ambient_temp = mlx.readAmbientTempC(); //주변온도
+  float object_temp = mlx.readObjectTempC(); //대상온도
+  //Serial.println(ambient_temp); //test
+  //Serial.println(object_temp); //test
+
+  int gas = analogRead(A0);//가스농도
+ //Serial.println(analogRead(A0)); //test
+
+  if(gas>500 && object_temp > 45){
+    Serial.write('1');
+  }
+  else 
+  Serial.write('2');
+  
+  delay(500);
+}
