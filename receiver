@@ -1,3 +1,4 @@
+//receiver1
 int LED = 12;
 char message;
 
@@ -24,3 +25,36 @@ else
 }
 }
 }
+
+//receiver2
+int LED = 11;
+char message;
+
+void setup() 
+{
+Serial.begin(9600);
+pinMode(LED,OUTPUT);
+}
+
+void loop() 
+{
+  // put your main  code here, to run repeatedly:
+if(Serial.available())
+{
+  message = Serial.read();
+  if(message == '2')
+  {
+    digitalWrite(LED, HIGH);
+    delay(100);
+  }
+else
+{
+  digitalWrite(LED,LOW);
+}
+}
+}
+
+// receiver1과 2는 동작방식이 반대 
+// receiver1은 평상시엔 불이 꺼져있고 receiver2는 평상시에 불이 켜져있음 
+// 센서로부터 이상이 감지가 돼서 데이터를 받으면 receiver 1은 불이 켜지고 receiver 2는 불이 꺼짐. 
+// 좀더 매끄럽게 진행되도록 코드 수정 예정.
