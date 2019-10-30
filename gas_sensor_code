@@ -1,0 +1,20 @@
+//transmitter
+
+void setup() 
+{
+Serial.begin(9600);
+}
+
+void loop() 
+{
+int gas = analogRead(A0); //A0로부터 가스센서의 데이터를 인트형으로 받아온다.
+delay(100);
+if(gas > 500) // 가스센서의 수치가 500이상일때
+ Serial.println(analogRead(A0)); //만약에 가스농도가 500이라면 농도확인을 위해 시리얼 모니터에 출력하도록함 
+
+
+if(gas > 500) //가스농도가 500초과라면 수신부로 1이라는 데이터를 보내서 특정 동작을 수행하도록 유도함 
+Serial.write('1');
+else
+Serial.write('2'); // 가스농도가 500미만이라면 수신부로 2라는 데이터를 보내서 특정 동작을 수행하도록 유도함 
+}
