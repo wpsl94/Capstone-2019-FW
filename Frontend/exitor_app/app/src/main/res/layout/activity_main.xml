@@ -58,6 +58,7 @@
                 app:layout_constraintTop_toTopOf="@+id/btnBluetoothOn"
                 android:background="@drawable/btn_4"
                 android:textSize="20dp"
+                android:theme="@style/MyButton"
                 />
 
 
@@ -85,7 +86,9 @@
         android:textSize="20dp"
         android:layout_marginBottom="50dp"
         app:layout_constraintStart_toStartOf="@+id/tvBluetoothStatus"
-        app:layout_constraintTop_toBottomOf="@+id/tvBluetoothStatus" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBluetoothStatus"
+        android:theme="@style/MyButton"/>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
