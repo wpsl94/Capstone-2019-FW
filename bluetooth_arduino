@@ -42,6 +42,13 @@ else if (message == 'd')
 
 }
 
+else
+{
+Serial.write("정상 상태");
+hc06.write("정상 상태");
+}
+
+
 delay(500);
 }
 }
