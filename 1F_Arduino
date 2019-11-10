@@ -1,0 +1,142 @@
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+#include <Adafruit_MLX90614.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+  Adafruit_MLX90614 mlx = Adafruit_MLX90614(); //온도감지센서. 
+
+int red =7;
+int yellow = 6;
+int green = 5;
+
+char message;
+
+
+void setup() 
+{
+Serial.begin(9600);
+lcd.init();
+lcd.backlight();
+mlx.begin();
+
+
+
+pinMode(red,OUTPUT);
+pinMode(yellow,OUTPUT);
+pinMode(green,OUTPUT);
+
+lcd.setCursor(0,0);
+lcd.print("1F ACTIVATE FEST");
+lcd.setCursor(0,1);
+lcd.print("1F ACTIVATE FEST");
+
+digitalWrite(yellow,HIGH);
+}
+
+void loop() 
+{
+ float object_temp = mlx.readObjectTempC(); // 대상온도
+    //Serial.println(object_temp); // test
+
+    int gas = analogRead(A3); //가스농도
+   //Serial.println(analogRead(A3)); //test 
+
+    if(gas>500 || object_temp > 50) // 가스의 수치가 500이상이 되거나 온도가 50도 이상이 될때
+    {
+     Serial.write('a'); // 가스수치가 500을 초과하거나 
+                        // 온도가 50도 이상으로 올라갈시 
+                        // 화재감지로 인식하고 신호를 보낸다.
+                        //8번 아두이노는 1층 화재를 나타내는 'a'라는 문자를
+                       // 엑스비를 통해 다른 아두이노 들로 보낸다.
+
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("1F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To EXIT");
+
+    digitalWrite(red,HIGH);
+    digitalWrite(yellow,LOW);
+    digitalWrite(green,LOW);
+
+    }
+
+
+if(Serial.available())
+{
+  message = Serial.read();
+  
+  if(message == 'q')
+  { //초기화 아두이노 
+    lcd.clear();   
+    lcd.setCursor(0,0);
+    lcd.print("1F ACTIVATE FEST");
+    lcd.setCursor(0,1);
+    lcd.print("1F ACTIVATE FEST");
+
+    digitalWrite(red,LOW);
+    digitalWrite(yellow,HIGH);
+    digitalWrite(green,LOW);
+  }
+  
+else if (message == 'a')
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("1F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To EXIT");
+
+    digitalWrite(red,HIGH);
+    digitalWrite(green,LOW);
+    digitalWrite(yellow,LOW);
+}
+
+else if (message == 'b')
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("2F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To EXIT");
+
+digitalWrite(red,HIGH);
+digitalWrite(yellow,LOW);
+digitalWrite(green,LOW);
+}
+
+else if (message == 'c')
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("3F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To EXIT");
+
+digitalWrite(red,HIGH);
+digitalWrite(yellow,LOW);
+digitalWrite(green,LOW);
+}
+
+else if (message == 'd')
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("2F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To EXIT");
+
+digitalWrite(red,HIGH);
+digitalWrite(yellow,LOW);
+digitalWrite(green,LOW);
+
+}
+
+else
+;
+
+delay(500);
+}
+
+}

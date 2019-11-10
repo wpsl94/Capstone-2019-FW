@@ -1,0 +1,54 @@
+#include <SoftwareSerial.h>
+
+SoftwareSerial hc06(2,3); //Tx, Rx
+char message;
+
+void setup()
+{
+Serial.begin(9600);
+hc06.begin(9600);
+}
+
+void loop()
+{
+if(Serial.available())
+{
+  message = Serial.read();
+
+ if (message == 'a')
+{
+    Serial.write("1층 화재");
+    hc06.write("1층 화재");
+}
+
+else if (message == 'b')
+{
+    Serial.write("2층 화재");
+    hc06.write("2층 화재");
+
+}
+
+else if (message == 'c')
+{
+      Serial.write("3층 화재");
+       hc06.write("3층 화재");
+
+}
+
+else if (message == 'd')
+{
+    Serial.write("2층 내부 화재");
+      hc06.write("2층 내부 화재");
+
+}
+
+else
+{
+Serial.write("정상 상태");
+hc06.write("정상 상태");
+}
+
+
+delay(500);
+}
+}
