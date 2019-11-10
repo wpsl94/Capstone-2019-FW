@@ -26,16 +26,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class BluetoothActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
     TextView mTvBluetoothStatus;
     TextView mTvReceiveData;
     TextView mTvSendData;
-
-    TextView mTvReceiveDatatemp;
-    TextView mTvReceiveDatafloor;
-    TextView mTvReceiveDatappm;
-    TextView mTvReceiveSituation;
-
     Button mBtnBluetoothOn;
     Button mBtnBluetoothOff;
     Button mBtnConnect;
@@ -44,7 +38,6 @@ public class BluetoothActivity extends AppCompatActivity {
     BluetoothAdapter mBluetoothAdapter;
     Set<BluetoothDevice> mPairedDevices;
     List<String> mListPairedDevices;
-
 
     Handler mBluetoothHandler;
     ConnectedBluetoothThread mThreadConnectedBluetooth;
@@ -64,10 +57,6 @@ public class BluetoothActivity extends AppCompatActivity {
 
         mTvBluetoothStatus = (TextView) findViewById(R.id.tvBluetoothStatus);
         mTvReceiveData = (TextView) findViewById(R.id.tvReceiveData);
-        mTvReceiveDatafloor = (TextView) findViewById(R.id.start_floor);
-        mTvReceiveDatatemp = (TextView) findViewById(R.id.temp);
-        mTvReceiveDatappm = (TextView) findViewById(R.id.gas);
-        mTvReceiveSituation = (TextView) findViewById(R.id.dwfloor);
         mTvSendData = (EditText) findViewById(R.id.tvSendData);
         mBtnBluetoothOn = (Button) findViewById(R.id.btnBluetoothOn);
         mBtnBluetoothOff = (Button) findViewById(R.id.btnBluetoothOff);
@@ -108,12 +97,8 @@ public class BluetoothActivity extends AppCompatActivity {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == BT_MESSAGE_READ) {
                     String readMessage = null;
-                    //String readTemp = null;
-                    //String readPPM = null;
-                    //String readFloor = null;
                     try {
                         readMessage = new String((byte[]) msg.obj, "UTF-8");
-                        //readTemp = new String((byte[]) msg.obj, "UTF-8");
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
@@ -185,6 +170,9 @@ public class BluetoothActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int item) {
                         connectSelectedDevice(items[item].toString());
 
+
+                        //TODO: 페어링 완료 되었을 시 status로 옮겨감
+                        startActivity(new Intent(MainActivity2.this, StatusActivity.class));
                     }
                 });
                 AlertDialog alert = builder.create();

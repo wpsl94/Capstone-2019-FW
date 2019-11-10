@@ -31,4 +31,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.8.0'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9'
     implementation 'com.akexorcist:bluetoothspp:1.0.0'
+    implementation 'com.akexorcist:bluetoothspp:1.0.0'
+    implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
+    implementation 'com.android.support:design:26.1.0'
+
+
 }

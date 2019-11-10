@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             //TODO: 분기설정
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            startActivity(new Intent(SplashActivity.this, StatusActivity.class));
 
             //SplashActivity.this.finish();
 
