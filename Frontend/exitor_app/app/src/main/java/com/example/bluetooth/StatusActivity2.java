@@ -9,10 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Logger;
 
-public class StatusActivity extends AppCompatActivity {
+public class StatusActivity2 extends AppCompatActivity {
     TextView mTvBluetoothStatus;
     TextView mTvReceiveData;
     TextView mTvSendData;
@@ -64,6 +61,7 @@ public class StatusActivity extends AppCompatActivity {
     final static int BT_MESSAGE_READ = 2;
     final static int BT_CONNECTING_STATUS = 3;
     final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +81,6 @@ public class StatusActivity extends AppCompatActivity {
         textViewReceive = (TextView)findViewById(R.id.tvReceiveData);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-
 
 
         mBtnBluetoothOn.setOnClickListener(new Button.OnClickListener() {
@@ -115,85 +111,49 @@ public class StatusActivity extends AppCompatActivity {
             }
         });*/
 
+
         mBluetoothHandler = new Handler() {
 
             public void handleMessage(android.os.Message msg) {
 
-                    if (msg.what == BT_MESSAGE_READ) {
-                        String readMessage = null;
+                if (msg.what == BT_MESSAGE_READ) {
+                    String readMessage = null;
 
-                        try {
-                            readMessage = new String((byte[]) msg.obj, "UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
+                    try {
+                        readMessage = new String((byte[]) msg.obj, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
 
-                        //int intVal= Integer.parseInt(readMessage);
-                        mTvReceiveData.setText(readMessage);
-/*
-                    switch (readMessage){
-                        case "a1":
-                            startFloor.setText("1 F");
-                            upFloor.setText("2 F");
-                            dwFloor.setText("- F");
-                            break;
+                    //int intVal= Integer.parseInt(readMessage);
+                    mTvReceiveData.setText(readMessage);
 
-                        case "a2" :
-                            startFloor.setText("2 F");
-                            upFloor.setText("3 F");
-                            dwFloor.setText("2 F");
-                            break;
+                    int ardu_val = Integer.parseInt(readMessage);
 
-                        case "a3" :
-                            startFloor.setText("3 F");
-                            upFloor.setText("4 F");
-                            dwFloor.setText("3 F");
-                            break;
-
-                        case "a4" :
-                            startFloor.setText("2 F");
-                            upFloor.setText("3 F");
-                            dwFloor.setText("2 F");
-                            break;
-
-                        default:
-                                startFloor.setText(readMessage);
-                                upFloor.setText(readMessage);
-                                dwFloor.setText(readMessage);
-
-
-                    }*/
-
-                    if(readMessage.contains("a1")){
+                    if(ardu_val==1){
                         startFloor.setText("1 F");
                         upFloor.setText("2 F");
                         dwFloor.setText("- F");
-                        }
+                    }
 
-                    else if(readMessage.contains("a2")){
+                    else if(ardu_val==2){
                         startFloor.setText("2 F");
                         upFloor.setText("3 F");
                         dwFloor.setText("2 F");
                     }
-                    else if(readMessage.contains("a3")){
+
+                    else if(ardu_val==3){
                         startFloor.setText("3 F");
                         upFloor.setText("4 F");
                         dwFloor.setText("3 F");
                     }
-                    else if (readMessage.contains("a4")){
+                    else if (ardu_val==4){
                         startFloor.setText("2 F");
                         upFloor.setText("3 F");
                         dwFloor.setText("2 F");
                     }
 
-                    else if (readMessage.contains("a5")){
-                        startFloor.setText("F");
-                        upFloor.setText("F");
-                        dwFloor.setText("F");
-                    }
-
                   else {
-
                         startFloor.setText("5 F");
                         upFloor.setText("5 F");
                         dwFloor.setText("5 F");
