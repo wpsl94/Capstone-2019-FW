@@ -124,11 +124,16 @@ public class StatusActivity extends AppCompatActivity {
 
                         try {
                             readMessage = new String((byte[]) msg.obj, "UTF-8");
+                            readMessage = readMessage.substring(0, 2);
+
+                            Log.d("Info", readMessage);
+
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
 
                         //int intVal= Integer.parseInt(readMessage);
+
                         mTvReceiveData.setText(readMessage);
 /*
                     switch (readMessage){
@@ -168,7 +173,7 @@ public class StatusActivity extends AppCompatActivity {
                         startFloor.setText("1 F");
                         upFloor.setText("2 F");
                         dwFloor.setText("- F");
-                        }
+                    }
 
                     else if(readMessage.contains("a2")){
                         startFloor.setText("2 F");
@@ -191,13 +196,14 @@ public class StatusActivity extends AppCompatActivity {
                         upFloor.setText("F");
                         dwFloor.setText("F");
                     }
-
+/*
                   else {
 
                         startFloor.setText("5 F");
                         upFloor.setText("5 F");
                         dwFloor.setText("5 F");
                     }
+                    */
                     }
                 }
             };
