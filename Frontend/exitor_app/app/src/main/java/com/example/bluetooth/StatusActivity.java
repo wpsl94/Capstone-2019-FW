@@ -71,7 +71,7 @@ public class StatusActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         mTvBluetoothStatus = (TextView) findViewById(R.id.tvBluetoothStatus);
-        mTvReceiveData = (TextView) findViewById(R.id.tvReceiveData);
+        //mTvReceiveData = (TextView) findViewById(R.id.tvReceiveData);
         startFloor = (TextView) findViewById(R.id.start_floor);
         upFloor = (TextView) findViewById(R.id.upfloor);
         dwFloor  = (TextView) findViewById(R.id.dwfloor);
