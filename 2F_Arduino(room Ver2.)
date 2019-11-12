@@ -1,0 +1,126 @@
+#include <Wire.h>
+#include <Adafruit_MLX90614.h>
+  char message;
+  
+int led1 = 13; //내부LED1
+int led2 = 12; //내부LED2
+int led3 = 11; //내부LED3
+int led4 = 10; //내부LED4
+
+  Adafruit_MLX90614 mlx = Adafruit_MLX90614(); //온도감지센서. 
+
+  void setup() {
+    Serial.begin(9600); 
+    mlx.begin();
+    
+    pinMode(led1,OUTPUT);
+    pinMode(led2,OUTPUT);
+    pinMode(led3,OUTPUT);
+    pinMode(led4,OUTPUT);  
+  }
+
+  void loop() {
+    float object_temp = mlx.readObjectTempC(); // 대상온도
+    Serial.println(object_temp); // test
+
+    int gas = analogRead(A0); //가스농도
+   Serial.println(analogRead(A0)); //test 
+
+    if(gas>900 && object_temp > 55) // 가스의 수치가 900이상 / 온도가 55도 이상이 될때
+    {
+     Serial.write('d'); // 가스수치가 900을 초과하고 온도가 55도 이상으로 올라갈시 
+                        // 화재감지로 인식하고 신호를 보낸다.
+                        // 8번 아두이노는 2층 실내화재를 나타내는 'd'라는 문자를
+                        // 엑스비를 통해 다른 아두이노 들로 보낸다.
+
+     digitalWrite(led1,HIGH);           
+     digitalWrite(led2,HIGH);                   
+     digitalWrite(led3,HIGH);                   
+     digitalWrite(led4,HIGH);       
+delay(500);
+            
+        
+    }
+
+    else if (gas >1200)
+    {
+         Serial.write('d'); // 가스수치가 1200을 초과하면 
+                            //8번 아두이노는 2층 실내화재를 나타내는 'd'라는 문자를
+                           // 엑스비를 통해 다른 아두이노 들로 보낸다.
+
+     digitalWrite(led1,HIGH);           
+     digitalWrite(led2,HIGH);                   
+     digitalWrite(led3,HIGH);                   
+     digitalWrite(led4,HIGH);   
+delay(500);
+
+    }
+
+    else if (object_temp > 70)
+    {
+           Serial.write('d'); // 온도가 70도를 초과하면
+                              //8번 아두이노는 2층 실내화재를 나타내는 'd'라는 문자를
+                              // 엑스비를 통해 다른 아두이노 들로 보낸다.
+
+     digitalWrite(led1,HIGH);           
+     digitalWrite(led2,HIGH);                   
+     digitalWrite(led3,HIGH);                   
+     digitalWrite(led4,HIGH);   
+delay(500);
+
+    }
+    
+    else 
+    ; // 이상이 없을때는 아무 처리도 안함.
+
+
+if(Serial.available())
+{
+     message = Serial.read();
+
+     if(message == 'q') // 초기화 아두이노로부터 q를 받으면 (LED를 모두 꺼준다)
+     {
+     digitalWrite(led1,LOW);
+     digitalWrite(led2,LOW);
+     digitalWrite(led3,LOW);
+     digitalWrite(led4,LOW);
+     }
+
+         
+      else if (message =='a')
+     {
+     digitalWrite(led1,HIGH);
+     digitalWrite(led2,HIGH);
+     digitalWrite(led3,HIGH);
+     digitalWrite(led4,HIGH);
+     }    
+     
+     else if (message =='b')
+     {
+     digitalWrite(led1,HIGH);
+     digitalWrite(led2,HIGH);
+     digitalWrite(led3,HIGH);
+     digitalWrite(led4,HIGH);
+     }    
+     
+     else if (message =='c')
+     {
+     digitalWrite(led1,HIGH);
+     digitalWrite(led2,HIGH);
+     digitalWrite(led3,HIGH);
+     digitalWrite(led4,HIGH);
+     }
+
+     else if (message =='d')
+     {
+     digitalWrite(led1,HIGH);
+     digitalWrite(led2,HIGH);
+     digitalWrite(led3,HIGH);
+     digitalWrite(led4,HIGH);
+     }    
+     
+     else;
+
+}
+
+}

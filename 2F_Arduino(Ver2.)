@@ -1,0 +1,214 @@
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+  #include <Adafruit_MLX90614.h>
+  Adafruit_MLX90614 mlx = Adafruit_MLX90614(); //온도감지센서. 
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+//2층 시스템 
+int red =12;
+int red2 = 7;
+int yellow = 11;
+int yellow2 = 6;
+int green = 10;
+int green2 = 5;
+
+char message;
+
+
+void setup() 
+{
+Serial.begin(9600);
+lcd.init();
+lcd.backlight();
+
+pinMode(red,OUTPUT);
+pinMode(red2,OUTPUT);
+pinMode(yellow,OUTPUT);
+pinMode(yellow2,OUTPUT);
+pinMode(green,OUTPUT);
+pinMode(green2,OUTPUT);
+lcd.setCursor(0,0);
+lcd.print("2F ACTIVATE FEST");
+lcd.setCursor(0,1);
+lcd.print("2F ACTIVATE FEST");
+
+digitalWrite(yellow,HIGH);
+digitalWrite(yellow2,HIGH);
+}
+
+void loop() 
+{
+ float object_temp = mlx.readObjectTempC(); // 대상온도
+    //Serial.println(object_temp); // test
+
+    int gas = analogRead(A3); //가스농도
+   //Serial.println(analogRead(A3)); //test 
+
+    if(gas>900 && object_temp > 55) // 가스의 수치가 900이상 + 온도가 55도 이상이 될때
+    {
+     Serial.write('b'); // 가스수치가 900을 초과+ 온도가 55도 이상으로 올라갈시 
+                        // 화재감지로 인식하고 신호를 보낸다.
+                        //8번 아두이노는 2층 화재를 나타내는 'b'라는 문자를
+                       // 엑스비를 통해 다른 아두이노 들로 보낸다.
+
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("2F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To DOWN");
+
+    digitalWrite(red,HIGH);
+    digitalWrite(yellow,LOW);
+    digitalWrite(green,LOW);
+
+    digitalWrite(red2,LOW);
+    digitalWrite(yellow2,LOW);
+    digitalWrite(green2,HIGH);
+delay(500);
+
+    }
+
+    else if(gas>1200) // 가스의 수치가 1200이상이 될때
+    {
+     Serial.write('b'); // 가스수치가 1200을 초과하면
+                        // 화재감지로 인식하고 신호를 보낸다.
+                        //8번 아두이노는 2층 화재를 나타내는 'b'라는 문자를
+                       // 엑스비를 통해 다른 아두이노 들로 보낸다.
+
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("2F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To DOWN");
+
+    digitalWrite(red,HIGH);
+    digitalWrite(yellow,LOW);
+    digitalWrite(green,LOW);
+
+    digitalWrite(red2,LOW);
+    digitalWrite(yellow2,LOW);
+    digitalWrite(green2,HIGH);
+delay(500);
+
+    }
+
+    else if(object_temp > 70) // 온도가 70도 이상이 될때
+    {
+     Serial.write('b'); // 온도가 70도 이상으로 올라갈시 
+                        // 화재감지로 인식하고 신호를 보낸다.
+                        //8번 아두이노는 2층 화재를 나타내는 'b'라는 문자를
+                       // 엑스비를 통해 다른 아두이노 들로 보낸다.
+
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("2F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To DOWN");
+
+    digitalWrite(red,HIGH);
+    digitalWrite(yellow,LOW);
+    digitalWrite(green,LOW);
+
+    digitalWrite(red2,LOW);
+    digitalWrite(yellow2,LOW);
+    digitalWrite(green2,HIGH);
+delay(500);
+
+    }
+
+if(Serial.available())
+{
+  message = Serial.read();
+  
+  if(message == 'q')
+  { 
+    lcd.clear();   
+    lcd.setCursor(0,0);
+    lcd.print("2F ACTIVATE FEST");
+    lcd.setCursor(0,1);
+    lcd.print("2F ACTIVATE FEST");
+
+    digitalWrite(red,LOW);
+    digitalWrite(red2,LOW);
+
+    digitalWrite(yellow,HIGH);
+    digitalWrite(yellow2,HIGH);
+
+    digitalWrite(green,LOW);
+    digitalWrite(green2,LOW);
+  }
+  
+else if (message == 'a')
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("1F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To Upstair");
+
+    digitalWrite(green,HIGH);
+    digitalWrite(red,LOW);
+    digitalWrite(yellow,LOW);
+
+    digitalWrite(green2,LOW);
+    digitalWrite(red2,HIGH);
+    digitalWrite(yellow2,LOW);
+}
+
+else if (message == 'b')
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("2F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To DOWN");
+
+    digitalWrite(green,LOW);
+    digitalWrite(red,HIGH);
+    digitalWrite(yellow,LOW);
+
+    digitalWrite(green2,HIGH);
+    digitalWrite(red2,LOW);
+    digitalWrite(yellow2,LOW);
+}
+
+else if (message == 'c')
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("3F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To Down");
+
+        digitalWrite(green,LOW);
+    digitalWrite(red,HIGH);
+    digitalWrite(yellow,LOW);
+
+    digitalWrite(green2,HIGH);
+    digitalWrite(red2,LOW);
+    digitalWrite(yellow2,LOW);
+}
+
+else if (message == 'd')
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("2F Fire!! ");
+    lcd.setCursor(0,1);
+    lcd.print("Go To Down");
+    
+    digitalWrite(green,LOW);
+    digitalWrite(red,HIGH);
+    digitalWrite(yellow,LOW);
+
+    digitalWrite(green2,HIGH);
+    digitalWrite(red2,LOW);
+    digitalWrite(yellow2,LOW);
+}
+
+else
+;
+}
+
+
+}
