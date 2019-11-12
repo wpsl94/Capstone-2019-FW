@@ -134,7 +134,7 @@ public class StatusActivity extends AppCompatActivity {
 
                         //int intVal= Integer.parseInt(readMessage);
 
-                        mTvReceiveData.setText(readMessage);
+                        //mTvReceiveData.setText(readMessage);
 /*
                     switch (readMessage){
                         case "a1":

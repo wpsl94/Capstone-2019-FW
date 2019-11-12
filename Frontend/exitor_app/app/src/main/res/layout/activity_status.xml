@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StatusActivity"
-    android:padding="40dp"
+    android:paddingLeft="40dp"
+    android:paddingBottom="10dp"
+    android:paddingRight="40dp"
+
     android:orientation="vertical"
     android:gravity="center_vertical"
     android:weightSum="10"
@@ -14,11 +17,11 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="top|center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
         android:hint="STATUS"
         android:textColorHint="@color/warning"
         android:textSize="40dp"
@@ -34,18 +37,19 @@
 
         <Button
             android:id="@+id/btnBluetoothOn"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_marginRight="15dp"
             android:layout_height="wrap_content"
             android:text="블루투스 ON"
             android:background="@drawable/btn_3"
             android:textSize="20dp"
+            android:layout_weight="1"
             />
 
 
         <Button
             android:id="@+id/btnBluetoothOff"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="블루투스 OFF"
             app:layout_constraintStart_toEndOf="@+id/btnBluetoothOn"
@@ -53,6 +57,7 @@
             android:background="@drawable/btn_4"
             android:textSize="20dp"
             android:theme="@style/MyButton"
+            android:layout_weight="1"
             />
 
 
@@ -65,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
-        android:text="status"
+        android:text="블루투스 연결 상태"
         android:textSize="15dp"
         android:layout_gravity="center"
         android:gravity="center"
@@ -76,17 +81,17 @@
         android:id="@+id/tvReceiveData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Receive"
-        android:textSize="20dp"
+        android:textSize="1dp"
         android:textColor="@color/white"
         android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="@+id/btnSendData"
         app:layout_constraintTop_toBottomOf="@+id/btnSendData" />
     <Button
         android:id="@+id/btnConnect"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_2"
+        android:textColor="@color/white"
         android:text="연결하기"
         android:textSize="20dp"
 
