@@ -38,6 +38,8 @@ public class StatusActivity extends AppCompatActivity {
     Button mBtnBluetoothOn;
     Button mBtnBluetoothOff;
     Button mBtnConnect;
+
+
     Button mBtnSendData;
     InputStream mInputStream;
     OutputStream mOutputStream;
@@ -81,12 +83,19 @@ public class StatusActivity extends AppCompatActivity {
         mBtnConnect = (Button) findViewById(R.id.btnConnect);
         //mBtnSendData = (Button) findViewById(R.id.btnSendData);
         textViewReceive = (TextView)findViewById(R.id.tvReceiveData);
-
+        Button button = (Button) findViewById(R.id.sms);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
 
 
-
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //Intent intent= new Intent(getApplicationContext(), SmsActivity.class);
+                Intent intent= new Intent(getApplicationContext(), Sms.class);
+                startActivity(intent);
+            }
+        });
         mBtnBluetoothOn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -356,6 +365,7 @@ public class StatusActivity extends AppCompatActivity {
             if (mBluetoothAdapter.isEnabled()) {
                 Toast.makeText(getApplicationContext(), "블루투스가 이미 활성화 되어 있습니다.", Toast.LENGTH_LONG).show();
                 mTvBluetoothStatus.setText("활성화");
+
             } else {
                 Toast.makeText(getApplicationContext(), "블루투스가 활성화 되어 있지 않습니다.", Toast.LENGTH_LONG).show();
                 Intent intentBluetoothEnable = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);

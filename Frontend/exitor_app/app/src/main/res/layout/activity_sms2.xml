@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="40dp"
+    tools:context=".Sms">
+
+
+    <TextView
+        android:id="@+id/textViewPhoneNo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="수신 전화번호"
+        android:textColor="@color/warning"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/editTextPhoneNo2"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="26dp"
+        android:inputType="phone"
+        android:hint="01012345678"/>
+
+    <TextView
+        android:id="@+id/textViewSMS2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="메세지를 입력하세요."
+        android:textColor="@color/warning"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/editTextSMS2"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:hint="경기도 용인시 수지구 죽전로 152 미디어센터, 화재 발생했습니다. " />
+
+    <Button
+        android:id="@+id/buttonSend2"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="160dp"
+        android:background="@drawable/btn_3"
+        android:text="SMS 전송하기"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+</LinearLayout>

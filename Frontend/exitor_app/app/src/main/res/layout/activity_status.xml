@@ -12,19 +12,18 @@
     android:orientation="vertical"
     android:gravity="center_vertical"
     android:weightSum="10"
-    android:background="#1B212F"
+    android:background="#000000"
     >
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="top|center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="70dp"
         android:layout_marginBottom="20dp"
+        android:gravity="center|center_horizontal"
         android:hint="STATUS"
         android:textColorHint="@color/warning"
-        android:textSize="40dp"
+        android:textSize="36dp"
         android:textStyle="bold"
 
         />
@@ -37,46 +36,30 @@
 
         <Button
             android:id="@+id/btnBluetoothOn"
-            android:layout_width="match_parent"
-            android:layout_marginRight="15dp"
-            android:layout_height="wrap_content"
+            android:layout_width="98dp"
+            android:layout_height="34dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_4"
             android:text="블루투스 ON"
-            android:background="@drawable/btn_3"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            />
+            android:textSize="15dp" />
 
 
         <Button
             android:id="@+id/btnBluetoothOff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="98dp"
+            android:layout_height="34dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_4_2"
             android:text="블루투스 OFF"
-            app:layout_constraintStart_toEndOf="@+id/btnBluetoothOn"
-            app:layout_constraintTop_toTopOf="@+id/btnBluetoothOn"
-            android:background="@drawable/btn_4"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:theme="@style/MyButton"
-            android:layout_weight="1"
-            />
-
+            app:layout_constraintStart_toEndOf="@+id/btnBluetoothOn"
+            app:layout_constraintTop_toTopOf="@+id/btnBluetoothOn" />
 
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvBluetoothStatus"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:text="블루투스 연결 상태"
-        android:textSize="15dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/btnBluetoothOn"
-        app:layout_constraintTop_toBottomOf="@+id/btnBluetoothOn" />
+
     <TextView
         android:id="@+id/tvReceiveData"
         android:layout_width="wrap_content"
@@ -86,55 +69,67 @@
         android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="@+id/btnSendData"
         app:layout_constraintTop_toBottomOf="@+id/btnSendData" />
+
     <Button
         android:id="@+id/btnConnect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_2"
-        android:textColor="@color/white"
-        android:text="연결하기"
-        android:textSize="20dp"
-
+        android:layout_width="216dp"
+        android:layout_height="33dp"
         android:layout_gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/tvBluetoothStatus"
-        app:layout_constraintTop_toBottomOf="@+id/tvBluetoothStatus"
-        android:theme="@style/MyButton"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_1"
+        android:text="EXITOR 연결하기"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:theme="@style/MyButton" />
+    <TextView
+        android:id="@+id/tvBluetoothStatus"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:text="블루투스 연결 상태"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/btnBluetoothOn"
+        app:layout_constraintTop_toBottomOf="@+id/btnBluetoothOn" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="239dp"
         android:layout_height="70dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            >
+            android:layout_height="50dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/start"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:text="현재 진원지"
+                android:layout_weight="1"
                 android:gravity="left|center_vertical"
+                android:text="현재 진원지"
                 android:textColor="@color/white"
                 android:textSize="22dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/start_floor"
-                android:layout_width="158dp"
-                android:layout_height="51dp"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:background="@drawable/edge_1"
                 android:gravity="right|center_vertical"
                 android:text="F"
                 android:textColor="@color/warning"
                 android:textSize="25dp"
-                android:textStyle="bold"
-                android:background="@drawable/edge_1"/>
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -143,12 +138,13 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="239dp"
+        android:layout_gravity="center"
         android:layout_height="70dp"
+
         android:layout_weight="1"
-        android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="30dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -158,25 +154,26 @@
 
             <TextView
                 android:id="@+id/upfloor"
-                android:layout_width="107dp"
+                android:layout_width="84dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:background="@drawable/edge_1"
                 android:gravity="right|center_vertical"
                 android:text="F"
                 android:textColor="@color/warning"
                 android:textSize="30dp"
-                android:textStyle="bold"
-                android:background="@drawable/edge_1"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/uptxt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:text="이상 상행 대피"
                 android:gravity="center"
+                android:text=" 이상 상행 대피"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="20dp"
+
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -184,30 +181,29 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
 
             <TextView
                 android:id="@+id/dwfloor"
-                android:layout_width="107dp"
+                android:layout_width="84dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center"
+                android:background="@drawable/edge_1"
                 android:gravity="right|center_vertical"
                 android:text="F"
                 android:textColor="@color/warning"
                 android:textSize="30dp"
-                android:textStyle="bold"
-                android:background="@drawable/edge_1"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dwtxt"
@@ -217,7 +213,7 @@
                 android:gravity="center"
                 android:text="이하 하행 대피"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -225,18 +221,18 @@
     </LinearLayout>
 
     <Button
-
-        android:id="@+id/btn_edit"
-        android:layout_width="match_parent"
+        android:id="@+id/sms"
+        android:layout_width="245dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="70dp"
-        android:background="@drawable/btn_3"
+        android:background="@drawable/btn_2"
         android:text="화재 신고"
         android:textColor="#ffffff"
         android:textSize="22dp"
         android:textStyle="bold"
-        android:theme="@style/MyButton"/>
+        android:theme="@style/MyButton" />
 
 
 

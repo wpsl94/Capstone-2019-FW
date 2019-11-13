@@ -3,7 +3,7 @@
 
 
 
-    <item android:state_pressed="false">
+    <item android:state_pressed="true">
 
         <!--image대신 직접 selector를 그리겠다고 선언한다. -->
         <shape >
@@ -18,13 +18,13 @@
 
     <!--위와 동일하다.
     -->
-    <item android:state_pressed="true">
+    <item android:state_pressed="false">
         <shape >
             <!--도형안에 채워질 색을 정의한다.-->
-            <solid android:color="@color/warning"/>
+            <solid android:color="@color/graynavy"/>
 
             <!-- width = 테두리 선의 굴기, color = 테두리 선의 색을 정의한다.-->
-            <stroke android:width="2dp" android:color="@color/warning"/>
+            <stroke android:width="2dp" android:color="@color/grey"/>
 
             <corners android:radius="6dp"></corners>
         </shape>
