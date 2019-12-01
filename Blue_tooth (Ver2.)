@@ -16,27 +16,27 @@ message = Serial.read();
  
 if (message == 'a')
 {    
-    hc06.write("a");
+    hc06.write("a1");
 }
 
 else if (message == 'b')
 {    
-     hc06.write("b");
+     hc06.write("a2");
 }
 else if (message == 'c')
 {      
 
-     hc06.write("c");
+     hc06.write("a3");
 }
 else if (message == 'd')
 {     
      Serial.write("2층 내부 화재");
-     hc06.write("d");
+     hc06.write("a2");
 }
 
 else if (message =='q')
 {
-  hc06.write("q");
+  hc06.write("a5");
 }
 
 else
