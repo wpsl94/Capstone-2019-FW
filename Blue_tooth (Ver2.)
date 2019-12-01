@@ -25,7 +25,6 @@ else if (message == 'b')
 }
 else if (message == 'c')
 {      
-         Serial.write("3층 화재");
 
      hc06.write("c");
 }
