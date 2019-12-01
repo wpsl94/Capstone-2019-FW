@@ -31,7 +31,7 @@ else if (message == 'c')
 else if (message == 'd')
 {     
      Serial.write("2층 내부 화재");
-     hc06.write("a2");
+     hc06.write("a4");
 }
 
 else if (message =='q')
