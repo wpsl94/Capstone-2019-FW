@@ -38,10 +38,13 @@ public class Sms extends AppCompatActivity {
                 try {
                     //전송
                     SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phoneNo, null, sms, null, null);
-                    Toast.makeText(getApplicationContext(), "전송 완료!", Toast.LENGTH_LONG).show();
+                    smsManager.sendTextMessage(phoneNo,
+                                        null, sms, null, null);
+                    Toast.makeText(getApplicationContext(),
+                                        "전송 완료!", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "SMS faild, please try again later!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),
+                            "SMS faild, please try again later!", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
                 Log.d("HERE", phoneNo);
@@ -50,3 +53,4 @@ public class Sms extends AppCompatActivity {
 
     }
 }
+

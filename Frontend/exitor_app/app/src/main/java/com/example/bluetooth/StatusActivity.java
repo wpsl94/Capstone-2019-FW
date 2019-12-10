@@ -40,32 +40,38 @@ public class StatusActivity extends AppCompatActivity {
     Button mBtnConnect;
 
 
+
+    Set<BluetoothDevice> mPairedDevices;
+    List<String> mListPairedDevices;
+
+    Handler mBluetoothHandler;
+    ConnectedBluetoothThread mThreadConnectedBluetooth;
+    BluetoothDevice mBluetoothDevice;
+    BluetoothSocket mBluetoothSocket;
+
+    final static int BT_MESSAGE_READ = 2;
+    final static int BT_CONNECTING_STATUS = 3;
+    final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
+
+    byte mDelimiter = 10;
+    //private static final int REQUEST_ENABLE_BT = 3;
+    //Set<BluetoothDevice> mDevices;
+
     Button mBtnSendData;
     InputStream mInputStream;
     OutputStream mOutputStream;
     Thread mWorkerThread;
     int readBufferPositon;      //버퍼 내 수신 문자 저장 위치
     BluetoothAdapter mBluetoothAdapter;
-    Set<BluetoothDevice> mPairedDevices;
-    List<String> mListPairedDevices;
-    byte mDelimiter = 10;
-    //private static final int REQUEST_ENABLE_BT = 3;
-    //Set<BluetoothDevice> mDevices;
 
-    Handler mBluetoothHandler;
-    ConnectedBluetoothThread mThreadConnectedBluetooth;
-    BluetoothDevice mBluetoothDevice;
-    BluetoothSocket mBluetoothSocket;
+    private OutputStream outputStream = null; // 블루투스에 데이터를 출력하기 위한 출력 스트림
+    private InputStream inputStream = null; // 블루투스에 데이터를 입력하기 위한 입력 스트림
+    final static int BT_REQUEST_ENABLE = 1;
     private Thread workerThread = null; // 문자열 수신에 사용되는 쓰레드
     private int readBufferPosition; // 버퍼 내 문자 저장 위치
     private byte[] readBuffer; // 수신 된 문자열을 저장하기 위한 버퍼
     private TextView textViewReceive; // 수신 된 데이터를 표시하기 위한 텍스트 뷰
-    private OutputStream outputStream = null; // 블루투스에 데이터를 출력하기 위한 출력 스트림
-    private InputStream inputStream = null; // 블루투스에 데이터를 입력하기 위한 입력 스트림
-    final static int BT_REQUEST_ENABLE = 1;
-    final static int BT_MESSAGE_READ = 2;
-    final static int BT_CONNECTING_STATUS = 3;
-    final static UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -360,14 +366,17 @@ public class StatusActivity extends AppCompatActivity {
 
     void bluetoothOn() {
         if (mBluetoothAdapter == null) {
-            Toast.makeText(getApplicationContext(), "블루투스를 지원하지 않는 기기입니다.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "블루투스를 지원하지 않는 기기입니다.",
+                                                                        Toast.LENGTH_LONG).show();
         } else {
             if (mBluetoothAdapter.isEnabled()) {
-                Toast.makeText(getApplicationContext(), "블루투스가 이미 활성화 되어 있습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "블루투스가 이미 활성화 되어 있습니다.",
+                                                                        Toast.LENGTH_LONG).show();
                 mTvBluetoothStatus.setText("활성화");
 
             } else {
-                Toast.makeText(getApplicationContext(), "블루투스가 활성화 되어 있지 않습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "블루투스가 활성화 되어 있지 않습니다.",
+                                                                        Toast.LENGTH_LONG).show();
                 Intent intentBluetoothEnable = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(intentBluetoothEnable, BT_REQUEST_ENABLE);
             }
@@ -377,10 +386,12 @@ public class StatusActivity extends AppCompatActivity {
     void bluetoothOff() {
         if (mBluetoothAdapter.isEnabled()) {
             mBluetoothAdapter.disable();
-            Toast.makeText(getApplicationContext(), "블루투스가 비활성화 되었습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "블루투스가 비활성화 되었습니다.",
+                                                                        Toast.LENGTH_SHORT).show();
             mTvBluetoothStatus.setText("비활성화");
         } else {
-            Toast.makeText(getApplicationContext(), "블루투스가 이미 비활성화 되어 있습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "블루투스가 이미 비활성화 되어 있습니다.",
+                                                                        Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -413,7 +424,8 @@ public class StatusActivity extends AppCompatActivity {
                     mListPairedDevices.add(device.getName());
                     //mListPairedDevices.add(device.getName() + "\n" + device.getAddress());
                 }
-                final CharSequence[] items = mListPairedDevices.toArray(new CharSequence[mListPairedDevices.size()]);
+                final CharSequence[] items
+                        = mListPairedDevices.toArray(new CharSequence[mListPairedDevices.size()]);
                 mListPairedDevices.toArray(new CharSequence[mListPairedDevices.size()]);
 
                 builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -429,10 +441,12 @@ public class StatusActivity extends AppCompatActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
             } else {
-                Toast.makeText(getApplicationContext(), "페어링된 장치가 없습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),
+                                    "페어링된 장치가 없습니다.", Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "블루투스가 비활성화 되어 있습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),
+                            "블루투스가 비활성화 되어 있습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -450,7 +464,8 @@ public class StatusActivity extends AppCompatActivity {
             mThreadConnectedBluetooth.start();
             mBluetoothHandler.obtainMessage(BT_CONNECTING_STATUS, 1, -1).sendToTarget();
         } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), "블루투스 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),
+                                    "블루투스 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -468,7 +483,8 @@ public class StatusActivity extends AppCompatActivity {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "소켓 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),
+                                "소켓 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
             }
 
             mmInStream = tmpIn;
@@ -486,7 +502,8 @@ public class StatusActivity extends AppCompatActivity {
                         SystemClock.sleep(100);
                         bytes = mmInStream.available();
                         bytes = mmInStream.read(buffer, 0, bytes);
-                        mBluetoothHandler.obtainMessage(BT_MESSAGE_READ, bytes, -1, buffer).sendToTarget();
+                        mBluetoothHandler.obtainMessage(BT_MESSAGE_READ, bytes,
+                                                                -1, buffer).sendToTarget();
                     }
                 } catch (IOException e) {
                     break;
@@ -499,7 +516,8 @@ public class StatusActivity extends AppCompatActivity {
             try {
                 mmOutStream.write(bytes);
             } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "데이터 전송 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),
+                                    "데이터 전송 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -507,7 +525,8 @@ public class StatusActivity extends AppCompatActivity {
             try {
                 mmSocket.close();
             } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "소켓 해제 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),
+                                    "소켓 해제 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
             }
         }
 
